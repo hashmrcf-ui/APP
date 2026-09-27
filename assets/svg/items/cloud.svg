@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-cloud" role="img" aria-label="cloud">
     <path d="M40 116 C18 116 14 86 36 80 C34 56 64 46 76 62 C84 38 124 42 124 72 C146 72 150 116 124 116 Z" fill="#D6E8FA"/>
     <path d="M40 108 C18 108 14 80 36 74 C34 50 64 40 76 56 C84 32 124 36 124 66 C146 66 150 108 124 108 Z" fill="#FFFFFF"/>
-  <circle cx="69.2" cy="84" r="4.05" fill="#2B2350"/>
-  <circle cx="90.8" cy="84" r="4.05" fill="#2B2350"/>
-  <path d="M73.7 92.1 q6.3 6.3 12.6 0" fill="none" stroke="#2B2350" stroke-width="3.6" stroke-linecap="round"/></svg>
+  <circle cx="69.2" cy="84" r="4.05" fill="#24124F"/>
+  <circle cx="90.8" cy="84" r="4.05" fill="#24124F"/>
+  <path d="M73.7 92.1 q6.3 6.3 12.6 0" fill="none" stroke="#24124F" stroke-width="3.6" stroke-linecap="round"/></svg>

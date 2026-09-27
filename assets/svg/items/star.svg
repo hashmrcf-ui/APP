@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-star" role="img" aria-label="star">
-    <ellipse cx="80" cy="148" rx="40" ry="6" fill="#2B2350" opacity=".12"/>
+    <ellipse cx="80" cy="148" rx="40" ry="6" fill="#24124F" opacity=".12"/>
     <path d="M80.0,20.0 L97.6,57.7 L139.0,62.8 L108.5,91.3 L116.4,132.2 L80.0,112.0 L43.6,132.2 L51.5,91.3 L21.0,62.8 L62.4,57.7 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="14" stroke-linejoin="round"/>
     <ellipse cx="60" cy="60" rx="7" ry="12" transform="rotate(35 60 60)" fill="#fff" opacity=".4"/>
-  <circle cx="68" cy="86" r="4.5" fill="#2B2350"/>
-  <circle cx="92" cy="86" r="4.5" fill="#2B2350"/>
-  <path d="M73 95 q7 7 14 0" fill="none" stroke="#2B2350" stroke-width="4" stroke-linecap="round"/></svg>
+  <circle cx="68" cy="86" r="4.5" fill="#24124F"/>
+  <circle cx="92" cy="86" r="4.5" fill="#24124F"/>
+  <path d="M73 95 q7 7 14 0" fill="none" stroke="#24124F" stroke-width="4" stroke-linecap="round"/></svg>

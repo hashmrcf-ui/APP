@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-lulu" role="img" aria-label="Lulu">
+      <defs><clipPath id="clip-lulu"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#4CC38A"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-lulu)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="100" cy="214" rx="62" ry="44" fill="#fff"/>
+        <path d="M46 98 L40 32 L94 70 Z" fill="#fff"/>
+        <path d="M154 98 L160 32 L106 70 Z" fill="#FF8A3D"/>
+        <path d="M54 84 L52 50 L80 70 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M146 84 L148 50 L120 70 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="#fff"/>
+        <path d="M112 72 Q150 68 164 104 Q162 132 140 138 Q116 132 108 104 Z" fill="#FF8A3D" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="none"/>
+        <g class="eyes">
+    <circle cx="74" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="74" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="77.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="126" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="126" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <path d="M93 140 L107 140 L100 148 Z" fill="#FF5E7E" stroke-width="3"/>
+        <path d="M86 152 Q93 160 100 152 Q107 160 114 152" fill="none"/>
+        <g stroke-width="3"><line x1="22" y1="138" x2="52" y2="142"/><line x1="24" y1="152" x2="52" y2="150"/><line x1="178" y1="138" x2="148" y2="142"/><line x1="176" y1="152" x2="148" y2="150"/></g>
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg>

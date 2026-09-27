@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-label="Funnook"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M54 170 Q100 150 146 170 L154 230 L46 230 Z" fill="#F5B971"/>
+        <path d="M66 100 C42 72 30 42 30 14 C60 24 86 50 94 84 Z" fill="#F5B971"/>
+        <path d="M134 100 C158 72 170 42 170 14 C140 24 114 50 106 84 Z" fill="#F5B971"/>
+        <path d="M64 88 C50 66 44 46 43 32 C62 42 76 58 82 78 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M136 88 C150 66 156 46 157 32 C138 42 124 58 118 78 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="126" rx="66" ry="52" fill="#F5B971"/>
+        <path d="M37 134 Q58 178 100 178 Q142 178 163 134 Q132 152 100 148 Q68 152 37 134 Z" fill="#FFE9C7"/>
+        <g class="eyes">
+    <circle cx="76" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="78" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="81.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="124" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="122" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="125.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <ellipse cx="100" cy="142" rx="11" ry="7.5" fill="#24124F"/>
+        <path d="M91 155 Q100 163.1 109 155" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></svg>

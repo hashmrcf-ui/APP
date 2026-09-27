@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-curious" role="img" aria-label="Boomi curious">
-  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#24124F" opacity=".12"/>
   <g class="feet">
     <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
     <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
@@ -21,8 +21,8 @@
   <g class="eyes">
     <circle cx="88" cy="108" r="30" fill="#fff"/>
     <circle cx="152" cy="108" r="30" fill="#fff"/>
-    <circle cx="92" cy="112" r="14" fill="#2B2350"/>
-    <circle cx="148" cy="112" r="14" fill="#2B2350"/>
+    <circle cx="92" cy="112" r="14" fill="#24124F"/>
+    <circle cx="148" cy="112" r="14" fill="#24124F"/>
     <circle cx="96.9" cy="106.4" r="5.04" fill="#fff"/>
     <circle cx="152.9" cy="106.4" r="5.04" fill="#fff"/>
   </g><path d="M110 128 Q120 150 130 128 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/></g></svg>

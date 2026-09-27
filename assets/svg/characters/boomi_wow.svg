@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-wow" role="img" aria-label="Boomi wow">
-  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#24124F" opacity=".12"/>
   <g class="feet">
     <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
     <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
@@ -24,11 +24,11 @@
   <g class="eyes">
     <circle cx="88" cy="108" r="30" fill="#fff"/>
     <circle cx="152" cy="108" r="30" fill="#fff"/>
-    <circle cx="88" cy="112" r="9" fill="#2B2350"/>
-    <circle cx="152" cy="112" r="9" fill="#2B2350"/>
+    <circle cx="88" cy="112" r="9" fill="#24124F"/>
+    <circle cx="152" cy="112" r="9" fill="#24124F"/>
     <circle cx="91.15" cy="108.4" r="3.2399999999999998" fill="#fff"/>
     <circle cx="155.15" cy="108.4" r="3.2399999999999998" fill="#fff"/>
   </g>
     <path d="M112 126 Q120 136 128 126 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/>
-    <ellipse cx="120" cy="146" rx="9" ry="11" fill="#2B2350"/>
+    <ellipse cx="120" cy="146" rx="9" ry="11" fill="#24124F"/>
     <ellipse cx="120" cy="150" rx="5" ry="4" fill="#FF5E7E"/></g></svg>

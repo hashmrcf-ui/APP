@@ -1,0 +1,639 @@
+<title>بومي الشاشة الرئيسية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+  /* Single deliberate theme: the app itself is a night-violet world, so the page is too. */
+  :root {
+    color-scheme: dark;
+    --page: #1C0D45;
+    --app: #35197D;
+    --app-2: #4A2BA3;
+    --nav: #5133B3;
+    --text: #FFFFFF;
+    --muted: #C7BBF2;
+    --ink: #24124F;
+    --cta: #FF8A1F;
+    --cta-deep: #D9650A;
+    --display: 'Baloo Bhaijaan 2', 'Tajawal', system-ui, sans-serif;
+    --body: 'Tajawal', 'Baloo Bhaijaan 2', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--page); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.7; }
+  .page { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 72px; display: grid; gap: 64px; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 800; }
+  h2 { font-size: clamp(28px, 3.6vw, 38px); font-weight: 800; }
+  p { margin: 0; }
+  .intro { display: grid; gap: 10px; max-width: 70ch; }
+  .intro p { color: var(--muted); }
+  .eyebrow { font-family: var(--display); font-weight: 700; font-size: 15px; color: #FFC93C; letter-spacing: .02em; }
+
+  /* ---------- Tablet ---------- */
+  .tablet { background: #15131C; border-radius: clamp(18px, 3.4vw, 44px); padding: clamp(8px, 1.6vw, 20px); box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2C2A36; }
+  .screen {
+    container-type: inline-size;
+    position: relative; aspect-ratio: 4 / 3; max-width: 100%;
+    border-radius: clamp(10px, 2vw, 28px); overflow: hidden;
+    background: var(--app); font-family: var(--display);
+  }
+  .app { position: absolute; inset: 0; padding: 2.4cqw 0 0; display: flex; flex-direction: column; gap: 1.6cqw; }
+  .topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-inline: 3cqw; }
+  .avatar { width: 6.4cqw; height: 6.4cqw; border-radius: 50%; overflow: hidden; border: .45cqw solid #fff; background: #FF8A3D; justify-self: start; }
+  .avatar svg { width: 100%; height: 100%; display: block; }
+  .logo { display: flex; align-items: baseline; gap: .8cqw; font-weight: 800; font-size: 4.6cqw; line-height: 1; color: #fff; }
+  .logo .dot { width: 1.6cqw; height: 1.6cqw; border-radius: 50%; background: #FFC93C; box-shadow: 2.2cqw 0 0 #FFC93C; margin-inline-end: 2.2cqw; align-self: center; }
+  .logo small { font-size: 2cqw; color: var(--muted); font-weight: 700; }
+  .top-actions { justify-self: end; display: flex; gap: 1.4cqw; align-items: center; }
+  .cta { font-family: var(--display); font-weight: 800; font-size: 2.1cqw; color: #fff; background: var(--cta); border: 0; border-radius: 99px; padding: .6cqw 2.4cqw .8cqw; box-shadow: 0 .6cqw 0 var(--cta-deep); cursor: pointer; }
+  .round { width: 5.6cqw; height: 5.6cqw; border-radius: 50%; border: .35cqw solid rgba(255,255,255,.35); background: var(--app-2); display: grid; place-items: center; padding: 1.1cqw; cursor: pointer; }
+  .round svg { width: 100%; height: 100%; }
+
+  .row-title { font-size: 2.5cqw; font-weight: 800; padding-inline: 3cqw; line-height: 1; }
+  .row { display: flex; gap: 1.8cqw; padding-inline: 3cqw; overflow: hidden; }
+  .card {
+    flex: 0 0 26cqw; aspect-ratio: 3 / 2; position: relative; border-radius: 2.4cqw; overflow: hidden;
+    border: .5cqw solid rgba(255,255,255,.9); cursor: pointer; transition: transform .15s;
+    background: var(--app-2); padding: 0;
+  }
+  .card svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .card .label { position: absolute; bottom: 1cqw; inset-inline-start: 1cqw; background: rgba(36,18,79,.82); color: #fff; font-size: 1.9cqw; font-weight: 800; border-radius: 99px; padding: .15cqw 1.6cqw .35cqw; }
+  .card:active { transform: scale(.96); }
+
+  .badges { display: flex; gap: 2cqw; padding-inline: 3cqw; overflow: hidden; padding-block: .4cqw 1cqw; }
+  .badge-btn { flex: 0 0 16cqw; aspect-ratio: 1; position: relative; border: 0; background: none; padding: 0; cursor: pointer; font-family: var(--display); }
+  .badge-btn svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .badge-btn .name {
+    position: absolute; inset-inline: 0; bottom: .2cqw; text-align: center;
+    color: #fff; font-weight: 800; font-size: 2.3cqw; line-height: 1;
+    -webkit-text-stroke: .5cqw var(--ink); paint-order: stroke fill;
+  }
+  .badge-btn.pop svg { animation: pop .55s cubic-bezier(.3,1.7,.5,1); }
+
+  .topics { padding-inline: 3cqw; opacity: .45; }
+
+  .nav {
+    position: absolute; bottom: 1.6cqw; left: 50%; transform: translateX(-50%);
+    display: flex; gap: .6cqw; padding: .8cqw; border-radius: 3cqw;
+    background: var(--nav); box-shadow: 0 1cqw 0 rgba(0,0,0,.25);
+  }
+  .tab { width: 11cqw; border: 0; background: none; color: var(--muted); font-family: var(--display); font-weight: 700; font-size: 1.6cqw; display: grid; justify-items: center; gap: .2cqw; padding: .6cqw 0 .7cqw; border-radius: 2.2cqw; cursor: pointer; line-height: 1.1; }
+  .tab svg { width: 4.6cqw; height: 4.6cqw; transition: transform .2s; }
+  .tab[aria-selected="true"] { background: rgba(255,255,255,.16); color: #fff; }
+  .tab[aria-selected="true"] svg { transform: translateY(-.6cqw) scale(1.12); }
+  .fab { position: absolute; bottom: 2cqw; left: 2.4cqw; width: 8cqw; height: 8cqw; border-radius: 50%; background: var(--app-2); border: .5cqw solid rgba(255,255,255,.35); display: grid; place-items: center; padding: 1.2cqw; cursor: pointer; }
+  .fab svg { width: 100%; height: 100%; }
+
+  .screen .eyes { transform-box: fill-box; transform-origin: center; animation: blink 5s infinite; }
+  .badge-btn:nth-child(2) .eyes { animation-delay: 1.3s; }
+  .badge-btn:nth-child(3) .eyes { animation-delay: 2.1s; }
+  .badge-btn:nth-child(4) .eyes { animation-delay: .6s; }
+  .badge-btn:nth-child(5) .eyes { animation-delay: 3.2s; }
+  button:focus-visible { outline: .5cqw solid #FFC93C; outline-offset: .3cqw; }
+
+  /* ---------- Cast ---------- */
+  .cast { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .member { display: grid; gap: 8px; justify-items: center; text-align: center; align-content: start; }
+  .member svg { width: 100%; max-width: 170px; height: auto; }
+  .member h3 { font-size: 24px; font-weight: 800; }
+  .member .en { font-family: var(--display); color: var(--muted); font-size: 15px; direction: ltr; }
+  .member p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+  .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .note { background: #2A1766; border-radius: 26px; padding: 20px 22px; display: grid; gap: 6px; align-content: start; }
+  .note h3 { font-size: 20px; color: #FFC93C; }
+  .note p { color: var(--muted); font-size: 16px; }
+
+  @keyframes blink { 0%,94%,100% { transform: scaleY(1); } 96% { transform: scaleY(.08); } }
+  @keyframes pop { 0% { transform: scale(1); } 35% { transform: scale(.88) rotate(-4deg); } 70% { transform: scale(1.1) rotate(3deg); } 100% { transform: none; } }
+
+  @media (max-width: 860px) {
+    .cast { grid-template-columns: repeat(3, 1fr); }
+    .notes { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .page { padding-inline: 16px; gap: 48px; }
+    .cast { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<main class="page" dir="rtl" lang="ar">
+  <header class="intro">
+    <span class="eyebrow">الشاشة الرئيسية · مسودة أولى</span>
+    <h1>الصفحة الأولى التي يراها الطفل</h1>
+    <p>على نفس نمط Lingokids: خلفية بنفسجية ليلية، بطاقات دروس مرسومة، شخصيات في دوائر ملونة، وشريط تنقل عائم في الأسفل. كل الشخصيات والرسوم أصلية لنا. المس البطاقات والشخصيات والتبويبات.</p>
+  </header>
+
+  <div class="tablet">
+    <div class="screen">
+      <div class="app" dir="rtl">
+        <div class="topbar">
+          <div class="avatar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-boomi" role="img" aria-label="Boomi">
+      <defs><clipPath id="clip-boomi"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF8A3D"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-boomi)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M52 80 L40 30 L88 56 Z" fill="#6A4FD6"/>
+        <path d="M148 80 L160 30 L112 56 Z" fill="#6A4FD6"/>
+        <path d="M100 44 C154 44 184 84 184 140 C184 200 150 232 100 232 C50 232 16 200 16 140 C16 84 46 44 100 44 Z" fill="#8B6CEF"/>
+        <ellipse cx="100" cy="200" rx="50" ry="40" fill="#FFE9C7"/>
+        <circle cx="72" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <circle cx="128" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <g class="eyes">
+    <circle cx="72" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="75" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="79.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/>
+    <circle cx="128" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="125" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/></g>
+        <path d="M89 138 Q100 164 111 138 Z" fill="#FFC93C"/>
+        
+    <ellipse cx="40" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="160" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+        <ellipse cx="72" cy="66" rx="18" ry="8" transform="rotate(-24 72 66)" fill="#fff" opacity=".25" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg></div>
+          <div class="logo"><span>بومي</span><span class="dot" aria-hidden="true"></span></div>
+          <div class="top-actions">
+            <button class="cta" type="button">جرّب بلس</button>
+            <button class="round" type="button" aria-label="بحث"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"><circle cx="21" cy="21" r="12"/><line x1="30" y1="30" x2="41" y2="41"/></g></svg></button>
+          </div>
+        </div>
+
+        <h2 class="row-title">اختيارات اليوم</h2>
+        <div class="row">
+          <button class="card" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Hygiene"><rect width="300" height="200" fill="#5BB8F5"/>
+        <circle cx="40" cy="44" r="22" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="32.3" cy="36.3" r="4.4" fill="#fff"/><circle cx="262" cy="36" r="16" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="256.4" cy="30.4" r="3.2" fill="#fff"/><circle cx="250" cy="150" r="26" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="240.9" cy="140.9" r="5.2" fill="#fff"/><circle cx="28" cy="150" r="14" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="23.1" cy="145.1" r="2.8000000000000003" fill="#fff"/><circle cx="212" cy="88" r="10" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="208.5" cy="84.5" r="2" fill="#fff"/>
+        <g transform="translate(64 30) scale(0.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="68" y="168" width="64" height="70" rx="20" fill="#D9A066"/>
+        <ellipse cx="48" cy="92" rx="18" ry="10" transform="rotate(-30 48 92)" fill="#D9A066"/>
+        <ellipse cx="152" cy="92" rx="18" ry="10" transform="rotate(30 152 92)" fill="#D9A066"/>
+        <ellipse cx="100" cy="112" rx="50" ry="56" fill="#D9A066"/>
+        <g stroke-width="11"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <g stroke="none"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <ellipse cx="100" cy="162" rx="44" ry="30" fill="#F3C995"/>
+        <ellipse cx="86" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <ellipse cx="114" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <path d="M87 170 Q100 181.7 113 170" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        <g class="eyes">
+    <circle cx="80" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="82" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="85.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+    <circle cx="120" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="118" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="121.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+          <path d="M65 110 A15 15 0 0 1 95 110 Z" fill="#D9A066"/>
+          <path d="M105 110 A15 15 0 0 1 135 110 Z" fill="#D9A066"/></g>
+        
+    <ellipse cx="58" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="142" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g>
+        <circle cx="118" cy="52" r="14" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="113.1" cy="47.1" r="2.8000000000000003" fill="#fff"/><circle cx="146" cy="42" r="18" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="139.7" cy="35.7" r="3.6" fill="#fff"/><circle cx="172" cy="54" r="12" fill="#fff" fill-opacity=".3" stroke="#fff" stroke-width="3"/><circle cx="167.8" cy="49.8" r="2.4000000000000004" fill="#fff"/>
+        <g transform="rotate(-18 222 146)" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="184" y="120" width="76" height="52" rx="16" fill="#FFC93C"/>
+          <g fill="#FF8A3D" stroke="none"><circle cx="202" cy="136" r="5"/><circle cx="226" cy="150" r="6"/><circle cx="246" cy="134" r="4"/><circle cx="244" cy="158" r="4"/></g></g></svg><span class="label">النظافة</span></button>
+          <button class="card" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Numbers"><rect width="300" height="200" fill="#22C3B5"/>
+        <g fill="#fff" fill-opacity=".14"><rect x="4" y="4" width="36" height="44" rx="10"/><rect x="48" y="4" width="36" height="44" rx="10"/><rect x="92" y="4" width="36" height="44" rx="10"/><rect x="136" y="4" width="36" height="44" rx="10"/><rect x="180" y="4" width="36" height="44" rx="10"/><rect x="224" y="4" width="36" height="44" rx="10"/><rect x="268" y="4" width="36" height="44" rx="10"/><rect x="4" y="56" width="36" height="44" rx="10"/><rect x="48" y="56" width="36" height="44" rx="10"/><rect x="92" y="56" width="36" height="44" rx="10"/><rect x="136" y="56" width="36" height="44" rx="10"/><rect x="180" y="56" width="36" height="44" rx="10"/><rect x="224" y="56" width="36" height="44" rx="10"/><rect x="268" y="56" width="36" height="44" rx="10"/><rect x="4" y="108" width="36" height="44" rx="10"/><rect x="48" y="108" width="36" height="44" rx="10"/><rect x="92" y="108" width="36" height="44" rx="10"/><rect x="136" y="108" width="36" height="44" rx="10"/><rect x="180" y="108" width="36" height="44" rx="10"/><rect x="224" y="108" width="36" height="44" rx="10"/><rect x="268" y="108" width="36" height="44" rx="10"/><rect x="4" y="160" width="36" height="44" rx="10"/><rect x="48" y="160" width="36" height="44" rx="10"/><rect x="92" y="160" width="36" height="44" rx="10"/><rect x="136" y="160" width="36" height="44" rx="10"/><rect x="180" y="160" width="36" height="44" rx="10"/><rect x="224" y="160" width="36" height="44" rx="10"/><rect x="268" y="160" width="36" height="44" rx="10"/></g>
+        
+    <g transform="rotate(-6 94 101)" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="36" y="48" width="116" height="130" rx="22" fill="#FF8A3D"/>
+      <rect x="36" y="36" width="116" height="130" rx="22" fill="#FFC93C"/>
+      <rect x="48" y="45" width="46.400000000000006" height="10" rx="5" fill="#fff" opacity=".4" stroke="none"/>
+      <text x="94" y="132.2" text-anchor="middle" font-family="'Baloo Bhaijaan 2', sans-serif" font-weight="800" font-size="110" fill="#fff" stroke="#24124F" stroke-width="6" paint-order="stroke">3</text>
+    </g>
+        
+    <g transform="rotate(7 216 108)" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="166" y="64" width="100" height="112" rx="22" fill="#C93A5A"/>
+      <rect x="166" y="52" width="100" height="112" rx="22" fill="#FF5E7E"/>
+      <rect x="178" y="61" width="40" height="10" rx="5" fill="#fff" opacity=".4" stroke="none"/>
+      <text x="216" y="134.88" text-anchor="middle" font-family="'Baloo Bhaijaan 2', sans-serif" font-weight="800" font-size="92" fill="#fff" stroke="#24124F" stroke-width="6" paint-order="stroke">٣</text>
+    </g></svg><span class="label">الأرقام</span></button>
+          <button class="card" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Colors"><rect width="300" height="200" fill="#FFC93C"/><g fill="#fff" fill-opacity=".35"><circle cx="28" cy="14" r="3.5"/><circle cx="56" cy="14" r="3.5"/><circle cx="84" cy="14" r="3.5"/><circle cx="112" cy="14" r="3.5"/><circle cx="140" cy="14" r="3.5"/><circle cx="168" cy="14" r="3.5"/><circle cx="196" cy="14" r="3.5"/><circle cx="224" cy="14" r="3.5"/><circle cx="252" cy="14" r="3.5"/><circle cx="280" cy="14" r="3.5"/><circle cx="28" cy="42" r="3.5"/><circle cx="56" cy="42" r="3.5"/><circle cx="84" cy="42" r="3.5"/><circle cx="112" cy="42" r="3.5"/><circle cx="140" cy="42" r="3.5"/><circle cx="168" cy="42" r="3.5"/><circle cx="196" cy="42" r="3.5"/><circle cx="224" cy="42" r="3.5"/><circle cx="252" cy="42" r="3.5"/><circle cx="280" cy="42" r="3.5"/><circle cx="28" cy="70" r="3.5"/><circle cx="56" cy="70" r="3.5"/><circle cx="84" cy="70" r="3.5"/><circle cx="112" cy="70" r="3.5"/><circle cx="140" cy="70" r="3.5"/><circle cx="168" cy="70" r="3.5"/><circle cx="196" cy="70" r="3.5"/><circle cx="224" cy="70" r="3.5"/><circle cx="252" cy="70" r="3.5"/><circle cx="280" cy="70" r="3.5"/><circle cx="28" cy="98" r="3.5"/><circle cx="56" cy="98" r="3.5"/><circle cx="84" cy="98" r="3.5"/><circle cx="112" cy="98" r="3.5"/><circle cx="140" cy="98" r="3.5"/><circle cx="168" cy="98" r="3.5"/><circle cx="196" cy="98" r="3.5"/><circle cx="224" cy="98" r="3.5"/><circle cx="252" cy="98" r="3.5"/><circle cx="280" cy="98" r="3.5"/><circle cx="28" cy="126" r="3.5"/><circle cx="56" cy="126" r="3.5"/><circle cx="84" cy="126" r="3.5"/><circle cx="112" cy="126" r="3.5"/><circle cx="140" cy="126" r="3.5"/><circle cx="168" cy="126" r="3.5"/><circle cx="196" cy="126" r="3.5"/><circle cx="224" cy="126" r="3.5"/><circle cx="252" cy="126" r="3.5"/><circle cx="280" cy="126" r="3.5"/><circle cx="28" cy="154" r="3.5"/><circle cx="56" cy="154" r="3.5"/><circle cx="84" cy="154" r="3.5"/><circle cx="112" cy="154" r="3.5"/><circle cx="140" cy="154" r="3.5"/><circle cx="168" cy="154" r="3.5"/><circle cx="196" cy="154" r="3.5"/><circle cx="224" cy="154" r="3.5"/><circle cx="252" cy="154" r="3.5"/><circle cx="280" cy="154" r="3.5"/><circle cx="28" cy="182" r="3.5"/><circle cx="56" cy="182" r="3.5"/><circle cx="84" cy="182" r="3.5"/><circle cx="112" cy="182" r="3.5"/><circle cx="140" cy="182" r="3.5"/><circle cx="168" cy="182" r="3.5"/><circle cx="196" cy="182" r="3.5"/><circle cx="224" cy="182" r="3.5"/><circle cx="252" cy="182" r="3.5"/><circle cx="280" cy="182" r="3.5"/></g>
+        <g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <line x1="205" y1="60" x2="172" y2="210" stroke-width="9"/><line x1="245" y1="60" x2="278" y2="210" stroke-width="9"/>
+          <g transform="rotate(-5 215 90)">
+            <rect x="148" y="28" width="134" height="104" rx="12" fill="#fff"/>
+            <g fill="none" stroke-width="9">
+              <path d="M170 118 A45 45 0 0 1 260 118" stroke="#FF5E7E"/>
+              <path d="M181 118 A34 34 0 0 1 249 118" stroke="#FF8A3D"/>
+              <path d="M192 118 A23 23 0 0 1 238 118" stroke="#4CC38A"/>
+              <path d="M203 118 A12 12 0 0 1 227 118" stroke="#5BB8F5"/>
+            </g>
+            <circle cx="258" cy="50" r="11" fill="#FFC93C"/>
+          </g>
+          <ellipse cx="226" cy="186" rx="16" ry="8" fill="#FF5E7E"/><ellipse cx="258" cy="192" rx="12" ry="6" fill="#5BB8F5"/>
+        </g>
+        <g transform="translate(0 58) scale(0.72)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="100" cy="214" rx="62" ry="44" fill="#fff"/>
+        <path d="M46 98 L40 32 L94 70 Z" fill="#fff"/>
+        <path d="M154 98 L160 32 L106 70 Z" fill="#FF8A3D"/>
+        <path d="M54 84 L52 50 L80 70 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M146 84 L148 50 L120 70 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="#fff"/>
+        <path d="M112 72 Q150 68 164 104 Q162 132 140 138 Q116 132 108 104 Z" fill="#FF8A3D" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="none"/>
+        <g class="eyes">
+    <circle cx="74" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="74" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="77.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="126" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="126" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <path d="M93 140 L107 140 L100 148 Z" fill="#FF5E7E" stroke-width="3"/>
+        <path d="M86 152 Q93 160 100 152 Q107 160 114 152" fill="none"/>
+        <g stroke-width="3"><line x1="22" y1="138" x2="52" y2="142"/><line x1="24" y1="152" x2="52" y2="150"/><line x1="178" y1="138" x2="148" y2="142"/><line x1="176" y1="152" x2="148" y2="150"/></g>
+        
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g>
+        <g transform="rotate(-38 132 120)" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="126" y="80" width="12" height="70" rx="6" fill="#8A5A3C"/><path d="M122 80 Q132 50 142 80 Z" fill="#FF5E7E"/></g></svg><span class="label">الألوان</span></button>
+          <button class="card" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Letters"><rect width="300" height="200" fill="#FF6FA8"/><g fill="#fff" fill-opacity=".3"><circle cx="28" cy="14" r="3.5"/><circle cx="56" cy="14" r="3.5"/><circle cx="84" cy="14" r="3.5"/><circle cx="112" cy="14" r="3.5"/><circle cx="140" cy="14" r="3.5"/><circle cx="168" cy="14" r="3.5"/><circle cx="196" cy="14" r="3.5"/><circle cx="224" cy="14" r="3.5"/><circle cx="252" cy="14" r="3.5"/><circle cx="280" cy="14" r="3.5"/><circle cx="28" cy="42" r="3.5"/><circle cx="56" cy="42" r="3.5"/><circle cx="84" cy="42" r="3.5"/><circle cx="112" cy="42" r="3.5"/><circle cx="140" cy="42" r="3.5"/><circle cx="168" cy="42" r="3.5"/><circle cx="196" cy="42" r="3.5"/><circle cx="224" cy="42" r="3.5"/><circle cx="252" cy="42" r="3.5"/><circle cx="280" cy="42" r="3.5"/><circle cx="28" cy="70" r="3.5"/><circle cx="56" cy="70" r="3.5"/><circle cx="84" cy="70" r="3.5"/><circle cx="112" cy="70" r="3.5"/><circle cx="140" cy="70" r="3.5"/><circle cx="168" cy="70" r="3.5"/><circle cx="196" cy="70" r="3.5"/><circle cx="224" cy="70" r="3.5"/><circle cx="252" cy="70" r="3.5"/><circle cx="280" cy="70" r="3.5"/><circle cx="28" cy="98" r="3.5"/><circle cx="56" cy="98" r="3.5"/><circle cx="84" cy="98" r="3.5"/><circle cx="112" cy="98" r="3.5"/><circle cx="140" cy="98" r="3.5"/><circle cx="168" cy="98" r="3.5"/><circle cx="196" cy="98" r="3.5"/><circle cx="224" cy="98" r="3.5"/><circle cx="252" cy="98" r="3.5"/><circle cx="280" cy="98" r="3.5"/><circle cx="28" cy="126" r="3.5"/><circle cx="56" cy="126" r="3.5"/><circle cx="84" cy="126" r="3.5"/><circle cx="112" cy="126" r="3.5"/><circle cx="140" cy="126" r="3.5"/><circle cx="168" cy="126" r="3.5"/><circle cx="196" cy="126" r="3.5"/><circle cx="224" cy="126" r="3.5"/><circle cx="252" cy="126" r="3.5"/><circle cx="280" cy="126" r="3.5"/><circle cx="28" cy="154" r="3.5"/><circle cx="56" cy="154" r="3.5"/><circle cx="84" cy="154" r="3.5"/><circle cx="112" cy="154" r="3.5"/><circle cx="140" cy="154" r="3.5"/><circle cx="168" cy="154" r="3.5"/><circle cx="196" cy="154" r="3.5"/><circle cx="224" cy="154" r="3.5"/><circle cx="252" cy="154" r="3.5"/><circle cx="280" cy="154" r="3.5"/><circle cx="28" cy="182" r="3.5"/><circle cx="56" cy="182" r="3.5"/><circle cx="84" cy="182" r="3.5"/><circle cx="112" cy="182" r="3.5"/><circle cx="140" cy="182" r="3.5"/><circle cx="168" cy="182" r="3.5"/><circle cx="196" cy="182" r="3.5"/><circle cx="224" cy="182" r="3.5"/><circle cx="252" cy="182" r="3.5"/><circle cx="280" cy="182" r="3.5"/></g>
+        
+    <g transform="rotate(-7 76 89)" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="22" y="42" width="108" height="118" rx="22" fill="#2E9E6A"/>
+      <rect x="22" y="30" width="108" height="118" rx="22" fill="#4CC38A"/>
+      <rect x="34" y="39" width="43.2" height="10" rx="5" fill="#fff" opacity=".4" stroke="none"/>
+      <text x="76" y="117.32" text-anchor="middle" font-family="'Baloo Bhaijaan 2', sans-serif" font-weight="800" font-size="96" fill="#fff" stroke="#24124F" stroke-width="6" paint-order="stroke">ب</text>
+    </g>
+        
+    <g transform="rotate(9 152 131)" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="120" y="108" width="64" height="70" rx="22" fill="#3591D1"/>
+      <rect x="120" y="96" width="64" height="70" rx="22" fill="#5BB8F5"/>
+      <rect x="132" y="105" width="25.6" height="10" rx="5" fill="#fff" opacity=".4" stroke="none"/>
+      <text x="152" y="147.8" text-anchor="middle" font-family="'Baloo Bhaijaan 2', sans-serif" font-weight="800" font-size="52" fill="#fff" stroke="#24124F" stroke-width="6" paint-order="stroke">B</text>
+    </g>
+        <g transform="translate(168 50) scale(0.72)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M54 170 Q100 150 146 170 L154 230 L46 230 Z" fill="#F5B971"/>
+        <path d="M66 100 C42 72 30 42 30 14 C60 24 86 50 94 84 Z" fill="#F5B971"/>
+        <path d="M134 100 C158 72 170 42 170 14 C140 24 114 50 106 84 Z" fill="#F5B971"/>
+        <path d="M64 88 C50 66 44 46 43 32 C62 42 76 58 82 78 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M136 88 C150 66 156 46 157 32 C138 42 124 58 118 78 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="126" rx="66" ry="52" fill="#F5B971"/>
+        <path d="M37 134 Q58 178 100 178 Q142 178 163 134 Q132 152 100 148 Q68 152 37 134 Z" fill="#FFE9C7"/>
+        <g class="eyes">
+    <circle cx="76" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="78" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="81.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="124" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="122" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="125.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <ellipse cx="100" cy="142" rx="11" ry="7.5" fill="#24124F"/>
+        <path d="M91 155 Q100 163.1 109 155" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></svg><span class="label">الحروف</span></button>
+          <button class="card" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Science"><rect width="300" height="200" fill="#9B7BFF"/>
+        <g fill="#fff"><circle cx="30" cy="30" r="3.5"/><circle cx="270" cy="40" r="3.5"/><circle cx="250" cy="170" r="3.5"/><circle cx="60" cy="170" r="3.5"/><circle cx="150" cy="20" r="3.5"/><circle cx="220" cy="110" r="3.5"/></g>
+        <g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><circle cx="236" cy="70" r="34" fill="#FF8A3D"/><ellipse cx="236" cy="70" rx="58" ry="14" transform="rotate(-18 236 70)" fill="none" stroke="#FFC93C" stroke-width="7"/></g>
+        <g transform="translate(40 42) scale(0.8)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <line x1="100" y1="58" x2="100" y2="30"/>
+        <circle cx="100" cy="26" r="10" fill="#FF5E7E"/>
+        <rect x="76" y="160" width="48" height="70" rx="12" fill="#5FB8F0"/>
+        <rect x="24" y="94" width="22" height="40" rx="9" fill="#FFC93C"/>
+        <rect x="154" y="94" width="22" height="40" rx="9" fill="#FFC93C"/>
+        <rect x="40" y="56" width="120" height="112" rx="34" fill="#8FD8FF"/>
+        <rect x="52" y="64" width="30" height="10" rx="5" fill="#fff" opacity=".55" stroke="none"/>
+        <rect x="56" y="78" width="88" height="68" rx="20" fill="#24124F"/>
+        <g class="eyes" stroke="none"><ellipse cx="82" cy="106" rx="9" ry="12" fill="#6CF7E0"/><ellipse cx="118" cy="106" rx="9" ry="12" fill="#6CF7E0"/></g>
+        <path d="M84 126 Q100 138 116 126" fill="none" stroke="#6CF7E0" stroke-width="5" stroke-linecap="round"/>
+      </g></g></svg><span class="label">العلوم</span></button>
+        </div>
+
+        <h2 class="row-title">عوالم لتستكشفها</h2>
+        <div class="badges">
+          <button class="badge-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-boomi" role="img" aria-label="Boomi">
+      <defs><clipPath id="clip-boomi"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF8A3D"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-boomi)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M52 80 L40 30 L88 56 Z" fill="#6A4FD6"/>
+        <path d="M148 80 L160 30 L112 56 Z" fill="#6A4FD6"/>
+        <path d="M100 44 C154 44 184 84 184 140 C184 200 150 232 100 232 C50 232 16 200 16 140 C16 84 46 44 100 44 Z" fill="#8B6CEF"/>
+        <ellipse cx="100" cy="200" rx="50" ry="40" fill="#FFE9C7"/>
+        <circle cx="72" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <circle cx="128" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <g class="eyes">
+    <circle cx="72" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="75" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="79.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/>
+    <circle cx="128" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="125" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/></g>
+        <path d="M89 138 Q100 164 111 138 Z" fill="#FFC93C"/>
+        
+    <ellipse cx="40" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="160" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+        <ellipse cx="72" cy="66" rx="18" ry="8" transform="rotate(-24 72 66)" fill="#fff" opacity=".25" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><span class="name">بومي</span></button>
+          <button class="badge-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-funnook" role="img" aria-label="Funnook">
+      <defs><clipPath id="clip-funnook"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#22C3B5"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-funnook)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M54 170 Q100 150 146 170 L154 230 L46 230 Z" fill="#F5B971"/>
+        <path d="M66 100 C42 72 30 42 30 14 C60 24 86 50 94 84 Z" fill="#F5B971"/>
+        <path d="M134 100 C158 72 170 42 170 14 C140 24 114 50 106 84 Z" fill="#F5B971"/>
+        <path d="M64 88 C50 66 44 46 43 32 C62 42 76 58 82 78 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M136 88 C150 66 156 46 157 32 C138 42 124 58 118 78 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="126" rx="66" ry="52" fill="#F5B971"/>
+        <path d="M37 134 Q58 178 100 178 Q142 178 163 134 Q132 152 100 148 Q68 152 37 134 Z" fill="#FFE9C7"/>
+        <g class="eyes">
+    <circle cx="76" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="78" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="81.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="124" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="122" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="125.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <ellipse cx="100" cy="142" rx="11" ry="7.5" fill="#24124F"/>
+        <path d="M91 155 Q100 163.1 109 155" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><span class="name">فنّوك</span></button>
+          <button class="badge-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-robi" role="img" aria-label="Robi">
+      <defs><clipPath id="clip-robi"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#9B7BFF"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-robi)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <line x1="100" y1="58" x2="100" y2="30"/>
+        <circle cx="100" cy="26" r="10" fill="#FF5E7E"/>
+        <rect x="76" y="160" width="48" height="70" rx="12" fill="#5FB8F0"/>
+        <rect x="24" y="94" width="22" height="40" rx="9" fill="#FFC93C"/>
+        <rect x="154" y="94" width="22" height="40" rx="9" fill="#FFC93C"/>
+        <rect x="40" y="56" width="120" height="112" rx="34" fill="#8FD8FF"/>
+        <rect x="52" y="64" width="30" height="10" rx="5" fill="#fff" opacity=".55" stroke="none"/>
+        <rect x="56" y="78" width="88" height="68" rx="20" fill="#24124F"/>
+        <g class="eyes" stroke="none"><ellipse cx="82" cy="106" rx="9" ry="12" fill="#6CF7E0"/><ellipse cx="118" cy="106" rx="9" ry="12" fill="#6CF7E0"/></g>
+        <path d="M84 126 Q100 138 116 126" fill="none" stroke="#6CF7E0" stroke-width="5" stroke-linecap="round"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><span class="name">روبي</span></button>
+          <button class="badge-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-lulu" role="img" aria-label="Lulu">
+      <defs><clipPath id="clip-lulu"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#4CC38A"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-lulu)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="100" cy="214" rx="62" ry="44" fill="#fff"/>
+        <path d="M46 98 L40 32 L94 70 Z" fill="#fff"/>
+        <path d="M154 98 L160 32 L106 70 Z" fill="#FF8A3D"/>
+        <path d="M54 84 L52 50 L80 70 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M146 84 L148 50 L120 70 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="#fff"/>
+        <path d="M112 72 Q150 68 164 104 Q162 132 140 138 Q116 132 108 104 Z" fill="#FF8A3D" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="none"/>
+        <g class="eyes">
+    <circle cx="74" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="74" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="77.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="126" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="126" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <path d="M93 140 L107 140 L100 148 Z" fill="#FF5E7E" stroke-width="3"/>
+        <path d="M86 152 Q93 160 100 152 Q107 160 114 152" fill="none"/>
+        <g stroke-width="3"><line x1="22" y1="138" x2="52" y2="142"/><line x1="24" y1="152" x2="52" y2="150"/><line x1="178" y1="138" x2="148" y2="142"/><line x1="176" y1="152" x2="148" y2="150"/></g>
+        
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><span class="name">لولو</span></button>
+          <button class="badge-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-jamlo" role="img" aria-label="Jamlo">
+      <defs><clipPath id="clip-jamlo"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF6FA8"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-jamlo)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="68" y="168" width="64" height="70" rx="20" fill="#D9A066"/>
+        <ellipse cx="48" cy="92" rx="18" ry="10" transform="rotate(-30 48 92)" fill="#D9A066"/>
+        <ellipse cx="152" cy="92" rx="18" ry="10" transform="rotate(30 152 92)" fill="#D9A066"/>
+        <ellipse cx="100" cy="112" rx="50" ry="56" fill="#D9A066"/>
+        <g stroke-width="11"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <g stroke="none"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <ellipse cx="100" cy="162" rx="44" ry="30" fill="#F3C995"/>
+        <ellipse cx="86" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <ellipse cx="114" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <path d="M87 170 Q100 181.7 113 170" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        <g class="eyes">
+    <circle cx="80" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="82" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="85.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+    <circle cx="120" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="118" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="121.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+          <path d="M65 110 A15 15 0 0 1 95 110 Z" fill="#D9A066"/>
+          <path d="M105 110 A15 15 0 0 1 135 110 Z" fill="#D9A066"/></g>
+        
+    <ellipse cx="58" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="142" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><span class="name">جملو</span></button>
+          <button class="badge-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-boomi" role="img" aria-label="Boomi">
+      <defs><clipPath id="clip-boomi"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF8A3D"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-boomi)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M52 80 L40 30 L88 56 Z" fill="#6A4FD6"/>
+        <path d="M148 80 L160 30 L112 56 Z" fill="#6A4FD6"/>
+        <path d="M100 44 C154 44 184 84 184 140 C184 200 150 232 100 232 C50 232 16 200 16 140 C16 84 46 44 100 44 Z" fill="#8B6CEF"/>
+        <ellipse cx="100" cy="200" rx="50" ry="40" fill="#FFE9C7"/>
+        <circle cx="72" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <circle cx="128" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <g class="eyes">
+    <circle cx="72" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="75" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="79.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/>
+    <circle cx="128" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="125" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/></g>
+        <path d="M89 138 Q100 164 111 138 Z" fill="#FFC93C"/>
+        
+    <ellipse cx="40" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="160" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+        <ellipse cx="72" cy="66" rx="18" ry="8" transform="rotate(-24 72 66)" fill="#fff" opacity=".25" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><span class="name">بومي</span></button>
+        </div>
+
+        <h2 class="row-title topics">المواضيع</h2>
+      </div>
+
+      <nav class="nav" dir="rtl" role="tablist" aria-label="الأقسام">
+        <button class="tab" type="button" role="tab" aria-selected="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="4" y="14" width="40" height="26" rx="13" fill="#9B7BFF"/><path d="M14 24 v8 M10 28 h8" stroke="#fff" stroke-width="4"/><circle cx="32" cy="24" r="3" fill="#FFC93C" stroke="none"/><circle cx="36" cy="31" r="3" fill="#FF5E7E" stroke="none"/></g></svg><span>العب</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="4" y="10" width="40" height="30" rx="9" fill="#FF5E7E"/><path d="M20 18 L31 25 L20 32 Z" fill="#fff" stroke="none"/><line x1="16" y1="44" x2="32" y2="44"/></g></svg><span>شاهد</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><path d="M24 12 Q14 6 4 10 V40 Q14 36 24 42 Q34 36 44 40 V10 Q34 6 24 12 Z" fill="#4CC38A"/><line x1="24" y1="12" x2="24" y2="42"/></g></svg><span>دروس</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><circle cx="16" cy="18" r="8" fill="#FF8A3D"/><path d="M4 42 Q4 28 16 28 Q28 28 28 42 Z" fill="#FF8A3D"/><circle cx="33" cy="16" r="8" fill="#FF6FA8"/><path d="M22 40 Q22 26 33 26 Q44 26 44 40 Z" fill="#FF6FA8"/></g></svg><span>معاً</span></button>
+      </nav>
+      <button class="fab" type="button" aria-label="ألبوم الملصقات"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"><rect x="8" y="6" width="32" height="38" rx="7" fill="#FF8A3D"/><path d="M24 16 l3 6 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1 Z" fill="#FFC93C" stroke-width="3"/></g></svg></button>
+    </div>
+  </div>
+
+  <section style="display:grid;gap:28px">
+    <div class="intro">
+      <span class="eyebrow">الشخصيات</span>
+      <h2>أصدقاء بومي</h2>
+      <p>خمس شخصيات، لكل واحدة لون وعالم ومادة تعليمية. بعضها من بيئتنا، مثل ثعلب الصحراء والجمل، فيشعر الطفل العربي أنها قريبة منه.</p>
+    </div>
+    <div class="cast">
+      <div class="member"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-boomi" role="img" aria-label="Boomi">
+      <defs><clipPath id="clip-boomi"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF8A3D"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-boomi)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M52 80 L40 30 L88 56 Z" fill="#6A4FD6"/>
+        <path d="M148 80 L160 30 L112 56 Z" fill="#6A4FD6"/>
+        <path d="M100 44 C154 44 184 84 184 140 C184 200 150 232 100 232 C50 232 16 200 16 140 C16 84 46 44 100 44 Z" fill="#8B6CEF"/>
+        <ellipse cx="100" cy="200" rx="50" ry="40" fill="#FFE9C7"/>
+        <circle cx="72" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <circle cx="128" cy="112" r="33" fill="#9B7BFF" stroke="none"/>
+        <g class="eyes">
+    <circle cx="72" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="75" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="79.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/>
+    <circle cx="128" cy="112" r="24" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="125" cy="114" r="12.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.8" cy="108.7" r="4.3" fill="#fff" stroke="none"/></g>
+        <path d="M89 138 Q100 164 111 138 Z" fill="#FFC93C"/>
+        
+    <ellipse cx="40" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="160" cy="146" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+        <ellipse cx="72" cy="66" rx="18" ry="8" transform="rotate(-24 72 66)" fill="#fff" opacity=".25" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><h3>بومي</h3><span class="en">Boomi</span><p>بومة فضولية تحب الأسئلة. تقود الطفل في كل الدروس.</p></div>
+      <div class="member"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-funnook" role="img" aria-label="Funnook">
+      <defs><clipPath id="clip-funnook"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#22C3B5"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-funnook)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M54 170 Q100 150 146 170 L154 230 L46 230 Z" fill="#F5B971"/>
+        <path d="M66 100 C42 72 30 42 30 14 C60 24 86 50 94 84 Z" fill="#F5B971"/>
+        <path d="M134 100 C158 72 170 42 170 14 C140 24 114 50 106 84 Z" fill="#F5B971"/>
+        <path d="M64 88 C50 66 44 46 43 32 C62 42 76 58 82 78 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M136 88 C150 66 156 46 157 32 C138 42 124 58 118 78 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="126" rx="66" ry="52" fill="#F5B971"/>
+        <path d="M37 134 Q58 178 100 178 Q142 178 163 134 Q132 152 100 148 Q68 152 37 134 Z" fill="#FFE9C7"/>
+        <g class="eyes">
+    <circle cx="76" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="78" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="81.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="124" cy="116" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="122" cy="117" r="8.8" fill="#24124F" stroke="none"/>
+    <circle cx="125.2" cy="113.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <ellipse cx="100" cy="142" rx="11" ry="7.5" fill="#24124F"/>
+        <path d="M91 155 Q100 163.1 109 155" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><h3>فنّوك</h3><span class="en">Funnook</span><p>ثعلب صحراء أذناه تسمعان كل شيء. رفيق دروس الأصوات والحروف.</p></div>
+      <div class="member"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-jamlo" role="img" aria-label="Jamlo">
+      <defs><clipPath id="clip-jamlo"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF6FA8"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-jamlo)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="68" y="168" width="64" height="70" rx="20" fill="#D9A066"/>
+        <ellipse cx="48" cy="92" rx="18" ry="10" transform="rotate(-30 48 92)" fill="#D9A066"/>
+        <ellipse cx="152" cy="92" rx="18" ry="10" transform="rotate(30 152 92)" fill="#D9A066"/>
+        <ellipse cx="100" cy="112" rx="50" ry="56" fill="#D9A066"/>
+        <g stroke-width="11"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <g stroke="none"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <ellipse cx="100" cy="162" rx="44" ry="30" fill="#F3C995"/>
+        <ellipse cx="86" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <ellipse cx="114" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <path d="M87 170 Q100 181.7 113 170" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        <g class="eyes">
+    <circle cx="80" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="82" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="85.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+    <circle cx="120" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="118" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="121.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+          <path d="M65 110 A15 15 0 0 1 95 110 Z" fill="#D9A066"/>
+          <path d="M105 110 A15 15 0 0 1 135 110 Z" fill="#D9A066"/></g>
+        
+    <ellipse cx="58" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="142" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><h3>جملو</h3><span class="en">Jamlo</span><p>جمل صغير هادئ وصبور. يعلّم العدّ والنظافة والعادات اليومية.</p></div>
+      <div class="member"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-robi" role="img" aria-label="Robi">
+      <defs><clipPath id="clip-robi"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#9B7BFF"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-robi)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <line x1="100" y1="58" x2="100" y2="30"/>
+        <circle cx="100" cy="26" r="10" fill="#FF5E7E"/>
+        <rect x="76" y="160" width="48" height="70" rx="12" fill="#5FB8F0"/>
+        <rect x="24" y="94" width="22" height="40" rx="9" fill="#FFC93C"/>
+        <rect x="154" y="94" width="22" height="40" rx="9" fill="#FFC93C"/>
+        <rect x="40" y="56" width="120" height="112" rx="34" fill="#8FD8FF"/>
+        <rect x="52" y="64" width="30" height="10" rx="5" fill="#fff" opacity=".55" stroke="none"/>
+        <rect x="56" y="78" width="88" height="68" rx="20" fill="#24124F"/>
+        <g class="eyes" stroke="none"><ellipse cx="82" cy="106" rx="9" ry="12" fill="#6CF7E0"/><ellipse cx="118" cy="106" rx="9" ry="12" fill="#6CF7E0"/></g>
+        <path d="M84 126 Q100 138 116 126" fill="none" stroke="#6CF7E0" stroke-width="5" stroke-linecap="round"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><h3>روبي</h3><span class="en">Robi</span><p>روبوت يحب التجارب. يأخذ الطفل في رحلات العلوم والأشكال.</p></div>
+      <div class="member"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-lulu" role="img" aria-label="Lulu">
+      <defs><clipPath id="clip-lulu"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#4CC38A"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-lulu)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="100" cy="214" rx="62" ry="44" fill="#fff"/>
+        <path d="M46 98 L40 32 L94 70 Z" fill="#fff"/>
+        <path d="M154 98 L160 32 L106 70 Z" fill="#FF8A3D"/>
+        <path d="M54 84 L52 50 L80 70 Z" fill="#FFA7B8" stroke="none"/>
+        <path d="M146 84 L148 50 L120 70 Z" fill="#FFA7B8" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="#fff"/>
+        <path d="M112 72 Q150 68 164 104 Q162 132 140 138 Q116 132 108 104 Z" fill="#FF8A3D" stroke="none"/>
+        <ellipse cx="100" cy="124" rx="68" ry="56" fill="none"/>
+        <g class="eyes">
+    <circle cx="74" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="74" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="77.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/>
+    <circle cx="126" cy="118" r="16" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="126" cy="118" r="8.0" fill="#24124F" stroke="none"/>
+    <circle cx="129.2" cy="114.5" r="2.9" fill="#fff" stroke="none"/></g>
+        <path d="M93 140 L107 140 L100 148 Z" fill="#FF5E7E" stroke-width="3"/>
+        <path d="M86 152 Q93 160 100 152 Q107 160 114 152" fill="none"/>
+        <g stroke-width="3"><line x1="22" y1="138" x2="52" y2="142"/><line x1="24" y1="152" x2="52" y2="150"/><line x1="178" y1="138" x2="148" y2="142"/><line x1="176" y1="152" x2="148" y2="150"/></g>
+        
+    <ellipse cx="56" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="144" cy="140" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg><h3>لولو</h3><span class="en">Lulu</span><p>قطة فنانة تحب الألوان والموسيقى والرسم.</p></div>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:20px">
+    <div class="intro">
+      <span class="eyebrow">ما تغيّر عن اللوحة الأولى</span>
+      <h2>أسلوب Lingokids</h2>
+    </div>
+    <div class="notes">
+      <div class="note"><h3>خط داكن حول كل شكل</h3><p>أضفت حدوداً بنفسجية داكنة سميكة، فتبدو الشخصيات كالملصقات وتبرز على الخلفية الداكنة.</p></div>
+      <div class="note"><h3>واجهة ليلية بنفسجية</h3><p>الخلفية بنفسجي عميق، والألوان الزاهية على البطاقات والدوائر، فيذهب نظر الطفل إلى المحتوى مباشرة.</p></div>
+      <div class="note"><h3>كل شخصية لها دائرة</h3><p>دائرة ملونة بإطار أبيض، والاسم مكتوب بخط عريض فوقها. كل دائرة تفتح عالم تلك الشخصية.</p></div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    const pop = (el) => { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); };
+    document.querySelectorAll('.badge-btn').forEach((b) => b.addEventListener('click', () => pop(b)));
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach((t) => t.addEventListener('click', () => tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)))));
+  })();
+</script>

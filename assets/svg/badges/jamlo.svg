@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="badge badge-jamlo" role="img" aria-label="Jamlo">
+      <defs><clipPath id="clip-jamlo"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <circle cx="100" cy="100" r="96" fill="#FF6FA8"/>
+      <circle cx="100" cy="100" r="72" fill="#fff" opacity=".14"/>
+      <g clip-path="url(#clip-jamlo)"><g transform="translate(14 2) scale(.86)"><g stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="68" y="168" width="64" height="70" rx="20" fill="#D9A066"/>
+        <ellipse cx="48" cy="92" rx="18" ry="10" transform="rotate(-30 48 92)" fill="#D9A066"/>
+        <ellipse cx="152" cy="92" rx="18" ry="10" transform="rotate(30 152 92)" fill="#D9A066"/>
+        <ellipse cx="100" cy="112" rx="50" ry="56" fill="#D9A066"/>
+        <g stroke-width="11"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <g stroke="none"><circle cx="82" cy="64" r="15" fill="#9C5B2E"/><circle cx="100" cy="56" r="17" fill="#9C5B2E"/><circle cx="118" cy="64" r="15" fill="#9C5B2E"/></g>
+        <ellipse cx="100" cy="162" rx="44" ry="30" fill="#F3C995"/>
+        <ellipse cx="86" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <ellipse cx="114" cy="155" rx="5" ry="3.5" fill="#24124F" stroke="none"/>
+        <path d="M87 170 Q100 181.7 113 170" fill="none" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        <g class="eyes">
+    <circle cx="80" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="82" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="85.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+    <circle cx="120" cy="110" r="15" fill="#fff" stroke="#24124F" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="118" cy="113" r="7.5" fill="#24124F" stroke="none"/>
+    <circle cx="121.0" cy="109.7" r="2.7" fill="#fff" stroke="none"/>
+          <path d="M65 110 A15 15 0 0 1 95 110 Z" fill="#D9A066"/>
+          <path d="M105 110 A15 15 0 0 1 135 110 Z" fill="#D9A066"/></g>
+    <ellipse cx="58" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+    <ellipse cx="142" cy="134" rx="10" ry="6" fill="#FF5E7E" opacity=".45" stroke="none"/>
+      </g></g></g>
+      <circle cx="100" cy="100" r="96" fill="none" stroke="#fff" stroke-width="6"/>
+    </svg>

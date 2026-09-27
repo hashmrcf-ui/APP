@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import homeArt from './home-art.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const P = JSON.parse(readFileSync(join(root, 'design/palette.json'), 'utf8')).colors;
@@ -146,14 +147,31 @@ for (const n of Object.keys(items)) {
   put(`assets/svg/items/${n}.svg`, svgs[`item_${n}`]);
 }
 
-// ---------- Style board ----------
+const H = homeArt(P);
+for (const k of Object.keys(H.heads)) {
+  put(`assets/svg/heads/${k}.svg`, H.headSvg(k));
+  put(`assets/svg/badges/${k}.svg`, H.badge(k));
+  svgs[`badge_${k}`] = H.badge(k);
+}
+for (const k of Object.keys(H.cards)) {
+  put(`assets/svg/cards/${k}.svg`, H.card(k));
+  svgs[`card_${k}`] = H.card(k);
+}
+for (const k of ['play', 'watch', 'lessons', 'together', 'search', 'stickers']) svgs[`icon_${k}`] = H.icon(k);
 
-const tpl = readFileSync(join(root, 'design/style-board.template.html'), 'utf8');
-const html = tpl
-  .replace(/\{\{svg:(\w+)\}\}/g, (_, k) => {
-    if (!svgs[k]) throw new Error(`unknown svg ${k}`);
-    return svgs[k];
-  })
-  .replace(/\{\{color:(\w+)\}\}/g, (_, k) => P[k]);
-writeFileSync(join(root, 'design/style-board.html'), html);
-console.log(`wrote ${Object.keys(svgs).length} svgs + design/style-board.html`);
+// ---------- Pages ----------
+
+const render = (name) => {
+  const tpl = readFileSync(join(root, `design/${name}.template.html`), 'utf8');
+  const html = tpl
+    .replace(/\{\{svg:(\w+)\}\}/g, (_, k) => {
+      if (!svgs[k]) throw new Error(`unknown svg ${k}`);
+      return svgs[k];
+    })
+    .replace(/\{\{color:(\w+)\}\}/g, (_, k) => P[k])
+    .replace(/\{\{about:(\w+)\}\}/g, (_, k) => H.heads[k].about);
+  writeFileSync(join(root, `design/${name}.html`), html);
+};
+render('style-board');
+render('home');
+console.log(`wrote ${Object.keys(svgs).length} svgs + design/style-board.html + design/home.html`);

@@ -1,0 +1,597 @@
+<title>عالم بومي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #F2F6FF;
+    --surface: #FFFFFF;
+    --surface-2: #E8EEFF;
+    --text: #2B2350;
+    --muted: #625C86;
+    --line: #D9E0F5;
+    --accent: #8B6CEF;
+    --accent-deep: #6A4FD6;
+    --stage-top: #9BD6FF;
+    --stage-bottom: #D9F0FF;
+    --hill: #4CC38A;
+    --hill-deep: #2E9E6A;
+    --display: 'Baloo Bhaijaan 2', 'Tajawal', system-ui, sans-serif;
+    --body: 'Tajawal', 'Baloo Bhaijaan 2', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #17132E;
+      --surface: #221D42;
+      --surface-2: #2C2653;
+      --text: #F1EEFF;
+      --muted: #ADA6D6;
+      --line: #3A3366;
+      --accent: #A790FF;
+      --accent-deep: #6A4FD6;
+      --stage-top: #3B4E9E;
+      --stage-bottom: #6E86C9;
+      --hill: #3DA877;
+      --hill-deep: #237A53;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #17132E;
+    --surface: #221D42;
+    --surface-2: #2C2653;
+    --text: #F1EEFF;
+    --muted: #ADA6D6;
+    --line: #3A3366;
+    --accent: #A790FF;
+    --accent-deep: #6A4FD6;
+    --stage-top: #3B4E9E;
+    --stage-bottom: #6E86C9;
+    --hill: #3DA877;
+    --hill-deep: #237A53;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .page {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 28px 64px;
+    display: grid;
+    gap: 72px;
+  }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(56px, 9vw, 96px); font-weight: 800; color: var(--accent); letter-spacing: -0.01em; }
+  h2 { font-size: clamp(30px, 4.4vw, 42px); font-weight: 800; }
+  h3 { font-size: 22px; font-weight: 700; }
+  p { margin: 0; }
+  .en { font-family: var(--display); direction: ltr; unicode-bidi: isolate; color: var(--muted); font-weight: 500; }
+  .eyebrow { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--accent); letter-spacing: 0.02em; }
+  .lede { color: var(--muted); max-width: 60ch; }
+  .section-head { display: grid; gap: 8px; margin-bottom: 24px; }
+
+  /* ---------- Hero ---------- */
+  .hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 36px; align-items: center; }
+  .hero-text { display: grid; gap: 18px; }
+  .hero-text .tag { font-family: var(--display); font-size: clamp(22px, 3vw, 28px); font-weight: 700; line-height: 1.35; }
+  .stage {
+    position: relative;
+    aspect-ratio: 1 / 0.86;
+    max-width: 100%;
+    border-radius: 44px;
+    background: linear-gradient(var(--stage-top), var(--stage-bottom));
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    border: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .stage:focus-visible { outline: 5px solid var(--accent); outline-offset: 5px; }
+  .stage .hill { position: absolute; inset-inline: -10%; bottom: -34%; height: 58%; border-radius: 50%; background: var(--hill); box-shadow: inset 0 -26px 0 var(--hill-deep); }
+  .stage .sun { position: absolute; top: 5%; inset-inline-start: 5%; width: 26%; }
+  .stage .cloud { position: absolute; width: 28%; top: 10%; inset-inline-end: 4%; animation: drift 9s ease-in-out infinite alternate; }
+  .stage .sun .rays { transform-box: view-box; transform-origin: 80px 76px; animation: spin 24s linear infinite; }
+  .stage .mascot { position: absolute; inset-inline: 0; margin: 0 auto; bottom: 7%; width: 56%; }
+  .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .mascot .boomi { transform-origin: 50% 92%; animation: breathe 3.2s ease-in-out infinite; }
+  .mascot .eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
+  .mascot .wing-l { transform-box: fill-box; transform-origin: 80% 20%; }
+  .mascot .wing-r { transform-box: fill-box; transform-origin: 20% 20%; }
+  .stage.hop .mascot .boomi { animation: hop .7s cubic-bezier(.3,1.6,.5,1); }
+  .stage.hop .wing-l { animation: flap-l .18s ease-in-out 4 alternate; }
+  .stage.hop .wing-r { animation: flap-r .18s ease-in-out 4 alternate; }
+  .hint {
+    position: absolute; bottom: 4%; inset-inline-start: 5%;
+    font-family: var(--display); font-weight: 700; font-size: 15px;
+    background: #fff; color: #2B2350; padding: 4px 14px; border-radius: 99px;
+  }
+
+  .btn {
+    font-family: var(--display); font-weight: 800; font-size: 22px;
+    color: #fff; background: #FF8A3D;
+    border: 0; border-radius: 22px; padding: 10px 30px 12px;
+    min-height: 64px; cursor: pointer; justify-self: start;
+    box-shadow: 0 7px 0 #D9631A;
+    transition: transform .08s, box-shadow .08s;
+  }
+  .btn:active { transform: translateY(6px); box-shadow: 0 1px 0 #D9631A; }
+  .btn:focus-visible { outline: 4px solid var(--accent); outline-offset: 4px; }
+
+  /* ---------- Decisions ---------- */
+  .decisions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .decision {
+    background: var(--surface); border-radius: 28px; padding: 22px 24px;
+    display: grid; gap: 6px; align-content: start;
+  }
+  .decision .label { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--muted); }
+  .decision .value { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1.2; color: var(--accent); }
+  .decision p { color: var(--muted); font-size: 16px; }
+  .rejected { font-size: 15px; color: var(--muted); border-top: 2px dashed var(--line); padding-top: 8px; margin-top: 6px; }
+
+  /* ---------- Palette ---------- */
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+  .swatch { display: grid; gap: 8px; }
+  .chip { height: 92px; border-radius: 24px; position: relative; }
+  .chip::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 16px; border-radius: 0 0 24px 24px; background: var(--deep); }
+  .swatch b { font-family: var(--display); font-size: 17px; }
+  .swatch code { font-size: 13px; color: var(--muted); direction: ltr; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Expressions ---------- */
+  .faces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .face-card { background: var(--surface); border-radius: 32px; padding: 18px 18px 20px; display: grid; gap: 4px; justify-items: center; text-align: center; }
+  .face-card svg { width: 100%; max-width: 220px; height: auto; }
+
+  /* ---------- Items ---------- */
+  .items { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  .item-btn {
+    background: var(--surface); border: 0; border-radius: 28px; padding: 14px 10px 12px;
+    display: grid; gap: 2px; justify-items: center; cursor: pointer; color: var(--text);
+    font-family: var(--display); font-weight: 700; font-size: 17px;
+  }
+  .item-btn svg { width: 100%; max-width: 120px; height: auto; }
+  .item-btn:focus-visible { outline: 4px solid var(--accent); outline-offset: 3px; }
+  .item-btn.wiggle svg { animation: wiggle .55s ease-in-out; }
+  .item-btn .en { font-size: 14px; }
+  .item-btn.sky { background: linear-gradient(var(--stage-top), var(--stage-bottom)); color: #2B2350; }
+  .item-btn.sky .en { color: #2B2350; opacity: .7; }
+
+  /* ---------- Rules ---------- */
+  .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 28px; margin: 0; padding: 0; list-style: none; }
+  .rules li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: baseline; }
+  .rules li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); transform: translateY(2px); }
+  .rules b { font-family: var(--display); }
+
+  /* ---------- Next ---------- */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: s; margin: 0; padding: 0; list-style: none; }
+  .steps li { background: var(--surface-2); border-radius: 26px; padding: 18px 20px; display: grid; gap: 6px; align-content: start; counter-increment: s; }
+  .steps li::before { content: counter(s); font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1; color: var(--accent); }
+  .steps li.now { background: var(--accent); color: #fff; }
+  .steps li.now::before { color: #fff; }
+  .steps li p { font-size: 15px; opacity: .85; }
+
+  @keyframes breathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.025,.975); } }
+  @keyframes blink { 0%,93%,100% { transform: scaleY(1); } 95.5% { transform: scaleY(.08); } }
+  @keyframes hop { 0% { transform: translateY(0) scale(1.08,.9); } 40% { transform: translateY(-22%) scale(.94,1.08); } 75% { transform: translateY(0) scale(1.08,.92); } 100% { transform: none; } }
+  @keyframes flap-l { to { transform: rotate(28deg); } }
+  @keyframes flap-r { to { transform: rotate(-28deg); } }
+  @keyframes drift { to { transform: translateX(-18%); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes wiggle { 0%,100% { transform: none; } 25% { transform: rotate(-9deg) scale(1.08); } 55% { transform: rotate(7deg) scale(1.1); } 80% { transform: rotate(-3deg); } }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .items { grid-template-columns: repeat(3, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .page { gap: 56px; padding-inline: 16px; }
+    .decisions, .rules { grid-template-columns: 1fr; }
+    .faces { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .face-card { padding: 10px 6px 12px; border-radius: 22px; }
+    .face-card h3 { font-size: 17px; }
+    .face-card .en { font-size: 12px; }
+    .steps { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<main class="page" dir="rtl" lang="ar">
+
+  <section class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">لوحة الأسلوب · الإصدار الأول</span>
+      <h1>بومي</h1>
+      <p class="tag">بومة صغيرة فضولية تتعلّم مع الطفل الحروف والأرقام والألوان.</p>
+      <p class="lede">هذه أول لوحة أسلوب لتطبيقنا. كل رسمة هنا ملف SVG حقيقي في المستودع، مرسوم بالكود من لوحة ألوان واحدة، وجاهز للحركة. المس بومي لترى كيف يتفاعل.</p>
+      <button class="btn" id="play-btn" type="button">المس بومي</button>
+    </div>
+
+    <button class="stage" id="stage" type="button" aria-label="المس بومي">
+      <div class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-sun" role="img" aria-label="sun">
+    <g class="rays"><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(0 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(36 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(72 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(108 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(144 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(180 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(216 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(252 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(288 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(324 80 76)" fill="#FF8A3D"/></g>
+    <circle cx="80" cy="76" r="40" fill="#FFC93C"/>
+    <ellipse cx="64" cy="58" rx="9" ry="13" transform="rotate(35 64 58)" fill="#fff" opacity=".4"/>
+    <ellipse cx="58" cy="88" rx="7" ry="4.5" fill="#FF5E7E" opacity=".45"/>
+    <ellipse cx="102" cy="88" rx="7" ry="4.5" fill="#FF5E7E" opacity=".45"/>
+    
+  <circle cx="68" cy="78" r="4.5" fill="#2B2350"/>
+  <circle cx="92" cy="78" r="4.5" fill="#2B2350"/>
+  <path d="M73 87 q7 7 14 0" fill="none" stroke="#2B2350" stroke-width="4" stroke-linecap="round"/></svg></div>
+      <div class="cloud"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-cloud" role="img" aria-label="cloud">
+    <path d="M40 116 C18 116 14 86 36 80 C34 56 64 46 76 62 C84 38 124 42 124 72 C146 72 150 116 124 116 Z" fill="#D6E8FA"/>
+    <path d="M40 108 C18 108 14 80 36 74 C34 50 64 40 76 56 C84 32 124 36 124 66 C146 66 150 108 124 108 Z" fill="#FFFFFF"/>
+    
+  <circle cx="69.2" cy="84" r="4.05" fill="#2B2350"/>
+  <circle cx="90.8" cy="84" r="4.05" fill="#2B2350"/>
+  <path d="M73.7 92.1 q6.3 6.3 12.6 0" fill="none" stroke="#2B2350" stroke-width="3.6" stroke-linecap="round"/></svg></div>
+      <div class="hill"></div>
+      <div class="mascot">
+        <div data-face="curious"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-curious" role="img" aria-label="Boomi curious">
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <g class="feet">
+    <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+    <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+  </g>
+  <g class="wing wing-l"><ellipse cx="44" cy="146" rx="19" ry="38" transform="rotate(16 44 146)" fill="#6A4FD6"/></g>
+  <g class="wing wing-r"><ellipse cx="196" cy="146" rx="19" ry="38" transform="rotate(-16 196 146)" fill="#6A4FD6"/></g>
+  <g class="tufts" fill="#6A4FD6" stroke="#6A4FD6" stroke-width="12" stroke-linejoin="round">
+    <path d="M66 72 L56 34 L98 54 Z"/>
+    <path d="M174 72 L184 34 L142 54 Z"/>
+  </g>
+  <path class="body" d="M120 42 C176 42 206 82 206 136 C206 186 170 216 120 216 C70 216 34 186 34 136 C34 82 64 42 120 42 Z" fill="#8B6CEF"/>
+  <ellipse cx="92" cy="74" rx="30" ry="15" transform="rotate(-22 92 74)" fill="#fff" opacity=".2"/>
+  <ellipse cx="120" cy="164" rx="54" ry="46" fill="#FFE9C7"/>
+  <g fill="none" stroke="#F2C98F" stroke-width="5" stroke-linecap="round">
+    <path d="M100 160 q8 8 16 0"/><path d="M124 160 q8 8 16 0"/><path d="M112 180 q8 8 16 0"/>
+  </g>
+  <ellipse cx="68" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/>
+  <ellipse cx="172" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/><g class="face">
+  <g class="eyes">
+    <circle cx="88" cy="108" r="30" fill="#fff"/>
+    <circle cx="152" cy="108" r="30" fill="#fff"/>
+    <circle cx="92" cy="112" r="14" fill="#2B2350"/>
+    <circle cx="148" cy="112" r="14" fill="#2B2350"/>
+    <circle cx="96.9" cy="106.4" r="5.04" fill="#fff"/>
+    <circle cx="152.9" cy="106.4" r="5.04" fill="#fff"/>
+  </g><path d="M110 128 Q120 150 130 128 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/></g></svg></div>
+        <div data-face="wow" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-wow" role="img" aria-label="Boomi wow">
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <g class="feet">
+    <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+    <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+  </g>
+  <g class="wing wing-l"><ellipse cx="44" cy="146" rx="19" ry="38" transform="rotate(16 44 146)" fill="#6A4FD6"/></g>
+  <g class="wing wing-r"><ellipse cx="196" cy="146" rx="19" ry="38" transform="rotate(-16 196 146)" fill="#6A4FD6"/></g>
+  <g class="tufts" fill="#6A4FD6" stroke="#6A4FD6" stroke-width="12" stroke-linejoin="round">
+    <path d="M66 72 L56 34 L98 54 Z"/>
+    <path d="M174 72 L184 34 L142 54 Z"/>
+  </g>
+  <path class="body" d="M120 42 C176 42 206 82 206 136 C206 186 170 216 120 216 C70 216 34 186 34 136 C34 82 64 42 120 42 Z" fill="#8B6CEF"/>
+  <ellipse cx="92" cy="74" rx="30" ry="15" transform="rotate(-22 92 74)" fill="#fff" opacity=".2"/>
+  <ellipse cx="120" cy="164" rx="54" ry="46" fill="#FFE9C7"/>
+  <g fill="none" stroke="#F2C98F" stroke-width="5" stroke-linecap="round">
+    <path d="M100 160 q8 8 16 0"/><path d="M124 160 q8 8 16 0"/><path d="M112 180 q8 8 16 0"/>
+  </g>
+  <ellipse cx="68" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/>
+  <ellipse cx="172" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/><g class="face">
+    <g fill="none" stroke="#6A4FD6" stroke-width="7" stroke-linecap="round">
+      <path d="M66 70 Q86 58 104 68"/><path d="M136 68 Q154 58 174 70"/>
+    </g>
+    
+  <g class="eyes">
+    <circle cx="88" cy="108" r="30" fill="#fff"/>
+    <circle cx="152" cy="108" r="30" fill="#fff"/>
+    <circle cx="88" cy="112" r="9" fill="#2B2350"/>
+    <circle cx="152" cy="112" r="9" fill="#2B2350"/>
+    <circle cx="91.15" cy="108.4" r="3.2399999999999998" fill="#fff"/>
+    <circle cx="155.15" cy="108.4" r="3.2399999999999998" fill="#fff"/>
+  </g>
+    <path d="M112 126 Q120 136 128 126 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/>
+    <ellipse cx="120" cy="146" rx="9" ry="11" fill="#2B2350"/>
+    <ellipse cx="120" cy="150" rx="5" ry="4" fill="#FF5E7E"/></g></svg></div>
+        <div data-face="joyful" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-joyful" role="img" aria-label="Boomi joyful">
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <g class="feet">
+    <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+    <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+  </g>
+  <g class="wing wing-l"><ellipse cx="44" cy="146" rx="19" ry="38" transform="rotate(16 44 146)" fill="#6A4FD6"/></g>
+  <g class="wing wing-r"><ellipse cx="196" cy="146" rx="19" ry="38" transform="rotate(-16 196 146)" fill="#6A4FD6"/></g>
+  <g class="tufts" fill="#6A4FD6" stroke="#6A4FD6" stroke-width="12" stroke-linejoin="round">
+    <path d="M66 72 L56 34 L98 54 Z"/>
+    <path d="M174 72 L184 34 L142 54 Z"/>
+  </g>
+  <path class="body" d="M120 42 C176 42 206 82 206 136 C206 186 170 216 120 216 C70 216 34 186 34 136 C34 82 64 42 120 42 Z" fill="#8B6CEF"/>
+  <ellipse cx="92" cy="74" rx="30" ry="15" transform="rotate(-22 92 74)" fill="#fff" opacity=".2"/>
+  <ellipse cx="120" cy="164" rx="54" ry="46" fill="#FFE9C7"/>
+  <g fill="none" stroke="#F2C98F" stroke-width="5" stroke-linecap="round">
+    <path d="M100 160 q8 8 16 0"/><path d="M124 160 q8 8 16 0"/><path d="M112 180 q8 8 16 0"/>
+  </g>
+  <ellipse cx="68" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/>
+  <ellipse cx="172" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/><g class="face">
+    <g class="eyes" fill="none" stroke="#2B2350" stroke-width="8" stroke-linecap="round">
+      <path d="M68 114 Q88 92 108 114"/><path d="M132 114 Q152 92 172 114"/>
+    </g>
+    <path d="M108 128 Q120 156 132 128 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/>
+    <ellipse cx="120" cy="140" rx="5" ry="4" fill="#FF5E7E"/></g></svg></div>
+      </div>
+      <span class="hint">اضغط هنا</span>
+    </button>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">ما اخترته للتطبيق</span>
+      <h2>أربعة قرارات قبل أول رسمة</h2>
+      <p class="lede">اخترت الأوسع انتشاراً والأخف على الأجهزة، والأنسب لتطبيق فيه رسوم متحركة وألعاب صغيرة.</p>
+    </div>
+    <div class="decisions">
+      <div class="decision">
+        <span class="label">التقنية</span>
+        <span class="value">Flutter <span class="en">+ Rive + Flame</span></span>
+        <p>كود واحد يعمل على آيفون وأندرويد والآيباد. يرسم بمحركه الخاص بسلاسة 60 إطاراً في الثانية، ويعرض SVG مباشرة. Rive للحركات التفاعلية، و Flame للألعاب الصغيرة.</p>
+        <p class="rejected">لم أختر Unity لأن حجم التطبيق يصبح كبيراً بلا حاجة، ولا React Native لأن الحركات الكثيفة فيه أقل سلاسة.</p>
+      </div>
+      <div class="decision">
+        <span class="label">العمر المستهدف</span>
+        <span class="value">3 – 7 سنوات</span>
+        <p>أوسع شريحة في تطبيقات الأطفال التعليمية. المستوى الأول (3–5) لمس وألوان وأصوات، والمستوى الثاني (5–7) حروف وكلمات وعدّ.</p>
+      </div>
+      <div class="decision">
+        <span class="label">اللغة</span>
+        <span class="value">عربي أولاً <span class="en">+ English</span></span>
+        <p>المحتوى العربي الجيد للأطفال قليل، وهذه فرصة. الإنجليزية لغة ثانية يتعلمها الطفل، وتوسّع السوق. الواجهة تعمل من اليمين لليسار.</p>
+      </div>
+      <div class="decision">
+        <span class="label">صيغة الرسوم</span>
+        <span class="value">SVG <span class="en">→ Rive</span></span>
+        <p>الرسوم الثابتة SVG واضحة على كل الشاشات وحجمها صغير جداً. الشخصيات مبنية من أجزاء منفصلة (عيون، أجنحة، منقار) لتنتقل إلى Rive وتتحرك.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">الألوان</span>
+      <h2>لوحة ألوان بلا أسود</h2>
+      <p class="lede">كل لون له توأم أغمق يُستخدم للحافة السفلية للأزرار ولأجنحة بومي. بدل الأسود نستخدم بنفسجياً داكناً جداً، فيبقى كل شيء ناعماً ودافئاً.</p>
+    </div>
+    <div class="palette">
+      <div class="swatch"><div class="chip" style="background:#8B6CEF;--deep:#6A4FD6"></div><b>بنفسجي بومي</b><code>#8B6CEF</code></div>
+      <div class="swatch"><div class="chip" style="background:#FFC93C;--deep:#FF8A3D"></div><b>شمس</b><code>#FFC93C</code></div>
+      <div class="swatch"><div class="chip" style="background:#FF8A3D;--deep:#D9631A"></div><b>برتقالي</b><code>#FF8A3D</code></div>
+      <div class="swatch"><div class="chip" style="background:#FF5E7E;--deep:#D93C5E"></div><b>توت</b><code>#FF5E7E</code></div>
+      <div class="swatch"><div class="chip" style="background:#4CC38A;--deep:#2E9E6A"></div><b>ورقة</b><code>#4CC38A</code></div>
+      <div class="swatch"><div class="chip" style="background:#5BB8F5;--deep:#3591D1"></div><b>سماء</b><code>#5BB8F5</code></div>
+      <div class="swatch"><div class="chip" style="background:#FFE9C7;--deep:#F2C98F"></div><b>كريمي</b><code>#FFE9C7</code></div>
+      <div class="swatch"><div class="chip" style="background:#2B2350;--deep:#1A1535"></div><b>حبر</b><code>#2B2350</code></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">الشخصية</span>
+      <h2>ثلاثة تعابير لبومي</h2>
+      <p class="lede">الجسم واحد، ويتغير الوجه فقط. بهذه الطريقة نضيف تعابير جديدة بسرعة، وتبقى الشخصية ثابتة في كل الشاشات.</p>
+    </div>
+    <div class="faces">
+      <div class="face-card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-curious" role="img" aria-label="Boomi curious">
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <g class="feet">
+    <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+    <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+  </g>
+  <g class="wing wing-l"><ellipse cx="44" cy="146" rx="19" ry="38" transform="rotate(16 44 146)" fill="#6A4FD6"/></g>
+  <g class="wing wing-r"><ellipse cx="196" cy="146" rx="19" ry="38" transform="rotate(-16 196 146)" fill="#6A4FD6"/></g>
+  <g class="tufts" fill="#6A4FD6" stroke="#6A4FD6" stroke-width="12" stroke-linejoin="round">
+    <path d="M66 72 L56 34 L98 54 Z"/>
+    <path d="M174 72 L184 34 L142 54 Z"/>
+  </g>
+  <path class="body" d="M120 42 C176 42 206 82 206 136 C206 186 170 216 120 216 C70 216 34 186 34 136 C34 82 64 42 120 42 Z" fill="#8B6CEF"/>
+  <ellipse cx="92" cy="74" rx="30" ry="15" transform="rotate(-22 92 74)" fill="#fff" opacity=".2"/>
+  <ellipse cx="120" cy="164" rx="54" ry="46" fill="#FFE9C7"/>
+  <g fill="none" stroke="#F2C98F" stroke-width="5" stroke-linecap="round">
+    <path d="M100 160 q8 8 16 0"/><path d="M124 160 q8 8 16 0"/><path d="M112 180 q8 8 16 0"/>
+  </g>
+  <ellipse cx="68" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/>
+  <ellipse cx="172" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/><g class="face">
+  <g class="eyes">
+    <circle cx="88" cy="108" r="30" fill="#fff"/>
+    <circle cx="152" cy="108" r="30" fill="#fff"/>
+    <circle cx="92" cy="112" r="14" fill="#2B2350"/>
+    <circle cx="148" cy="112" r="14" fill="#2B2350"/>
+    <circle cx="96.9" cy="106.4" r="5.04" fill="#fff"/>
+    <circle cx="152.9" cy="106.4" r="5.04" fill="#fff"/>
+  </g><path d="M110 128 Q120 150 130 128 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/></g></svg><h3>فضولي</h3><span class="en">Curious · idle</span></div>
+      <div class="face-card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-wow" role="img" aria-label="Boomi wow">
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <g class="feet">
+    <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+    <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+  </g>
+  <g class="wing wing-l"><ellipse cx="44" cy="146" rx="19" ry="38" transform="rotate(16 44 146)" fill="#6A4FD6"/></g>
+  <g class="wing wing-r"><ellipse cx="196" cy="146" rx="19" ry="38" transform="rotate(-16 196 146)" fill="#6A4FD6"/></g>
+  <g class="tufts" fill="#6A4FD6" stroke="#6A4FD6" stroke-width="12" stroke-linejoin="round">
+    <path d="M66 72 L56 34 L98 54 Z"/>
+    <path d="M174 72 L184 34 L142 54 Z"/>
+  </g>
+  <path class="body" d="M120 42 C176 42 206 82 206 136 C206 186 170 216 120 216 C70 216 34 186 34 136 C34 82 64 42 120 42 Z" fill="#8B6CEF"/>
+  <ellipse cx="92" cy="74" rx="30" ry="15" transform="rotate(-22 92 74)" fill="#fff" opacity=".2"/>
+  <ellipse cx="120" cy="164" rx="54" ry="46" fill="#FFE9C7"/>
+  <g fill="none" stroke="#F2C98F" stroke-width="5" stroke-linecap="round">
+    <path d="M100 160 q8 8 16 0"/><path d="M124 160 q8 8 16 0"/><path d="M112 180 q8 8 16 0"/>
+  </g>
+  <ellipse cx="68" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/>
+  <ellipse cx="172" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/><g class="face">
+    <g fill="none" stroke="#6A4FD6" stroke-width="7" stroke-linecap="round">
+      <path d="M66 70 Q86 58 104 68"/><path d="M136 68 Q154 58 174 70"/>
+    </g>
+    
+  <g class="eyes">
+    <circle cx="88" cy="108" r="30" fill="#fff"/>
+    <circle cx="152" cy="108" r="30" fill="#fff"/>
+    <circle cx="88" cy="112" r="9" fill="#2B2350"/>
+    <circle cx="152" cy="112" r="9" fill="#2B2350"/>
+    <circle cx="91.15" cy="108.4" r="3.2399999999999998" fill="#fff"/>
+    <circle cx="155.15" cy="108.4" r="3.2399999999999998" fill="#fff"/>
+  </g>
+    <path d="M112 126 Q120 136 128 126 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/>
+    <ellipse cx="120" cy="146" rx="9" ry="11" fill="#2B2350"/>
+    <ellipse cx="120" cy="150" rx="5" ry="4" fill="#FF5E7E"/></g></svg><h3>مندهش</h3><span class="en">Wow · on tap</span></div>
+      <div class="face-card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="boomi boomi-joyful" role="img" aria-label="Boomi joyful">
+  <ellipse cx="120" cy="224" rx="64" ry="9" fill="#2B2350" opacity=".12"/>
+  <g class="feet">
+    <ellipse cx="96" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+    <ellipse cx="144" cy="212" rx="17" ry="9" fill="#FF8A3D"/>
+  </g>
+  <g class="wing wing-l"><ellipse cx="44" cy="146" rx="19" ry="38" transform="rotate(16 44 146)" fill="#6A4FD6"/></g>
+  <g class="wing wing-r"><ellipse cx="196" cy="146" rx="19" ry="38" transform="rotate(-16 196 146)" fill="#6A4FD6"/></g>
+  <g class="tufts" fill="#6A4FD6" stroke="#6A4FD6" stroke-width="12" stroke-linejoin="round">
+    <path d="M66 72 L56 34 L98 54 Z"/>
+    <path d="M174 72 L184 34 L142 54 Z"/>
+  </g>
+  <path class="body" d="M120 42 C176 42 206 82 206 136 C206 186 170 216 120 216 C70 216 34 186 34 136 C34 82 64 42 120 42 Z" fill="#8B6CEF"/>
+  <ellipse cx="92" cy="74" rx="30" ry="15" transform="rotate(-22 92 74)" fill="#fff" opacity=".2"/>
+  <ellipse cx="120" cy="164" rx="54" ry="46" fill="#FFE9C7"/>
+  <g fill="none" stroke="#F2C98F" stroke-width="5" stroke-linecap="round">
+    <path d="M100 160 q8 8 16 0"/><path d="M124 160 q8 8 16 0"/><path d="M112 180 q8 8 16 0"/>
+  </g>
+  <ellipse cx="68" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/>
+  <ellipse cx="172" cy="142" rx="11" ry="7" fill="#FF5E7E" opacity=".5"/><g class="face">
+    <g class="eyes" fill="none" stroke="#2B2350" stroke-width="8" stroke-linecap="round">
+      <path d="M68 114 Q88 92 108 114"/><path d="M132 114 Q152 92 172 114"/>
+    </g>
+    <path d="M108 128 Q120 156 132 128 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="6" stroke-linejoin="round"/>
+    <ellipse cx="120" cy="140" rx="5" ry="4" fill="#FF5E7E"/></g></svg><h3>فرحان</h3><span class="en">Joyful · correct answer</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">العناصر</span>
+      <h2>أشياء لها وجوه</h2>
+      <p class="lede">مثل Sago Mini و Pok Pok: الأشياء الصغيرة لها عيون وابتسامة، فيتعلّق بها الطفل. المس أي واحدة.</p>
+    </div>
+    <div class="items">
+      <button class="item-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-apple" role="img" aria-label="apple">
+    <ellipse cx="80" cy="148" rx="44" ry="6" fill="#2B2350" opacity=".12"/>
+    <path d="M80 52 C60 36 26 44 26 86 C26 120 52 142 70 140 C76 139 78 136 80 136 C82 136 84 139 90 140 C108 142 134 120 134 86 C134 44 100 36 80 52 Z" fill="#FF5E7E"/>
+    <rect x="76" y="26" width="9" height="28" rx="4.5" transform="rotate(10 80 40)" fill="#8A5A3C"/>
+    <ellipse cx="102" cy="36" rx="18" ry="9" transform="rotate(-24 102 36)" fill="#4CC38A"/>
+    <ellipse cx="52" cy="76" rx="9" ry="16" transform="rotate(24 52 76)" fill="#fff" opacity=".35"/>
+    
+  <circle cx="68" cy="96" r="4.5" fill="#2B2350"/>
+  <circle cx="92" cy="96" r="4.5" fill="#2B2350"/>
+  <path d="M73 105 q7 7 14 0" fill="none" stroke="#2B2350" stroke-width="4" stroke-linecap="round"/></svg><span>تفاحة</span><span class="en">Apple</span></button>
+      <button class="item-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-star" role="img" aria-label="star">
+    <ellipse cx="80" cy="148" rx="40" ry="6" fill="#2B2350" opacity=".12"/>
+    <path d="M80.0,20.0 L97.6,57.7 L139.0,62.8 L108.5,91.3 L116.4,132.2 L80.0,112.0 L43.6,132.2 L51.5,91.3 L21.0,62.8 L62.4,57.7 Z" fill="#FFC93C" stroke="#FFC93C" stroke-width="14" stroke-linejoin="round"/>
+    <ellipse cx="60" cy="60" rx="7" ry="12" transform="rotate(35 60 60)" fill="#fff" opacity=".4"/>
+    
+  <circle cx="68" cy="86" r="4.5" fill="#2B2350"/>
+  <circle cx="92" cy="86" r="4.5" fill="#2B2350"/>
+  <path d="M73 95 q7 7 14 0" fill="none" stroke="#2B2350" stroke-width="4" stroke-linecap="round"/></svg><span>نجمة</span><span class="en">Star</span></button>
+      <button class="item-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-sun" role="img" aria-label="sun">
+    <g class="rays"><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(0 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(36 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(72 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(108 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(144 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(180 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(216 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(252 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(288 80 76)" fill="#FF8A3D"/><rect x="75" y="6" width="10" height="22" rx="5" transform="rotate(324 80 76)" fill="#FF8A3D"/></g>
+    <circle cx="80" cy="76" r="40" fill="#FFC93C"/>
+    <ellipse cx="64" cy="58" rx="9" ry="13" transform="rotate(35 64 58)" fill="#fff" opacity=".4"/>
+    <ellipse cx="58" cy="88" rx="7" ry="4.5" fill="#FF5E7E" opacity=".45"/>
+    <ellipse cx="102" cy="88" rx="7" ry="4.5" fill="#FF5E7E" opacity=".45"/>
+    
+  <circle cx="68" cy="78" r="4.5" fill="#2B2350"/>
+  <circle cx="92" cy="78" r="4.5" fill="#2B2350"/>
+  <path d="M73 87 q7 7 14 0" fill="none" stroke="#2B2350" stroke-width="4" stroke-linecap="round"/></svg><span>شمس</span><span class="en">Sun</span></button>
+      <button class="item-btn sky" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-cloud" role="img" aria-label="cloud">
+    <path d="M40 116 C18 116 14 86 36 80 C34 56 64 46 76 62 C84 38 124 42 124 72 C146 72 150 116 124 116 Z" fill="#D6E8FA"/>
+    <path d="M40 108 C18 108 14 80 36 74 C34 50 64 40 76 56 C84 32 124 36 124 66 C146 66 150 108 124 108 Z" fill="#FFFFFF"/>
+    
+  <circle cx="69.2" cy="84" r="4.05" fill="#2B2350"/>
+  <circle cx="90.8" cy="84" r="4.05" fill="#2B2350"/>
+  <path d="M73.7 92.1 q6.3 6.3 12.6 0" fill="none" stroke="#2B2350" stroke-width="3.6" stroke-linecap="round"/></svg><span>غيمة</span><span class="en">Cloud</span></button>
+      <button class="item-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-letterAlif" role="img" aria-label="letterAlif">
+    <ellipse cx="80" cy="148" rx="50" ry="6" fill="#2B2350" opacity=".12"/>
+    <rect x="22" y="30" width="116" height="112" rx="30" fill="#2E9E6A"/>
+    <rect x="22" y="20" width="116" height="112" rx="30" fill="#4CC38A"/>
+    <rect x="34" y="28" width="50" height="14" rx="7" fill="#fff" opacity=".3"/>
+    <text x="80" y="108" text-anchor="middle" font-family="'Baloo Bhaijaan 2', 'Tajawal', sans-serif" font-weight="800" font-size="82" fill="#fff">أ</text></svg><span>حرف الألف</span><span class="en">Letter</span></button>
+      <button class="item-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" class="item item-numberThree" role="img" aria-label="numberThree">
+    <ellipse cx="80" cy="148" rx="50" ry="6" fill="#2B2350" opacity=".12"/>
+    <rect x="22" y="30" width="116" height="112" rx="30" fill="#3591D1"/>
+    <rect x="22" y="20" width="116" height="112" rx="30" fill="#5BB8F5"/>
+    <rect x="34" y="28" width="50" height="14" rx="7" fill="#fff" opacity=".3"/>
+    <text x="80" y="96" text-anchor="middle" font-family="'Baloo Bhaijaan 2', sans-serif" font-weight="800" font-size="66" fill="#fff">3</text>
+    <circle cx="58" cy="114" r="6" fill="#fff"/><circle cx="80" cy="114" r="6" fill="#fff"/><circle cx="102" cy="114" r="6" fill="#fff"/></svg><span>ثلاثة</span><span class="en">Three</span></button>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">قواعد الرسم</span>
+      <h2>ما يجعل كل الرسوم من عالم واحد</h2>
+    </div>
+    <ul class="rules">
+      <li><span><b>بلا خطوط خارجية.</b> الأشكال تُفصل بالألوان فقط، مثل Toca Boca و Pok Pok.</span></li>
+      <li><span><b>كل الزوايا مستديرة.</b> لا زاوية حادة في أي شكل أو زر.</span></li>
+      <li><span><b>ضوء واحد من أعلى اليسار.</b> لمعة بيضاء شفافة على كل شكل، في نفس المكان دائماً.</span></li>
+      <li><span><b>ظل أرضي بسيط.</b> بيضاوي شفاف تحت الأشياء التي تقف على الأرض.</span></li>
+      <li><span><b>أزرار ممتلئة.</b> حافة سفلية أغمق تُضغط عند اللمس، فيشعر الطفل أنه ضغط شيئاً حقيقياً.</span></li>
+      <li><span><b>أهداف لمس كبيرة.</b> 64 نقطة على الأقل، لأن أصابع الأطفال غير دقيقة.</span></li>
+      <li><span><b>حركة في كل شيء.</b> ترمش الشخصيات وتتنفس دائماً، وتقفز عند اللمس.</span></li>
+      <li><span><b>كل رسمة لها حرف.</b> نصوص الواجهة قليلة، ويُقرأ كل نص بصوت عالٍ للطفل.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <span class="eyebrow">الخطوات القادمة</span>
+      <h2>من اللوحة إلى التطبيق</h2>
+    </div>
+    <ol class="steps">
+      <li class="now"><h3>اعتماد الأسلوب</h3><p>أنت هنا. غيّر ما لا يعجبك: الشخصية، الألوان، أو شكل العناصر.</p></li>
+      <li><h3>أصدقاء بومي</h3><p>شخصيتان أو ثلاث أخرى، وخلفيات: غابة، بيت، سماء ليلية.</p></li>
+      <li><h3>هيكل Flutter</h3><p>مشروع التطبيق، الشاشة الرئيسية، وتحريك بومي بـ Rive.</p></li>
+      <li><h3>أول لعبة</h3><p>لعبة الحروف: يلمس الطفل الحرف فيسمعه ويراه في كلمة.</p></li>
+    </ol>
+  </section>
+</main>
+
+<script>
+  (function () {
+    const stage = document.getElementById('stage');
+    const faces = stage.querySelectorAll('[data-face]');
+    let timers = [];
+    const show = (name) => faces.forEach((f) => { f.hidden = f.dataset.face !== name; });
+    function poke() {
+      timers.forEach(clearTimeout);
+      stage.classList.remove('hop');
+      void stage.offsetWidth;
+      stage.classList.add('hop');
+      show('wow');
+      timers = [
+        setTimeout(() => show('joyful'), 700),
+        setTimeout(() => { show('curious'); stage.classList.remove('hop'); }, 1900),
+      ];
+    }
+    stage.addEventListener('click', poke);
+    document.getElementById('play-btn').addEventListener('click', poke);
+
+    document.querySelectorAll('.item-btn').forEach((b) => {
+      b.addEventListener('click', () => {
+        b.classList.remove('wiggle');
+        void b.offsetWidth;
+        b.classList.add('wiggle');
+      });
+    });
+  })();
+</script>

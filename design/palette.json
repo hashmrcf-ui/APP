@@ -1,0 +1,21 @@
+{
+  "name": "Boomi World palette",
+  "notes": "Flat, saturated, no black. Each hue has a deep partner used for the lower edge of chunky buttons and for the mascot's wings/tufts.",
+  "colors": {
+    "ink": "#2B2350",
+    "grape": "#8B6CEF",
+    "grapeDeep": "#6A4FD6",
+    "belly": "#FFE9C7",
+    "bellyShade": "#F2C98F",
+    "sun": "#FFC93C",
+    "tangerine": "#FF8A3D",
+    "berry": "#FF5E7E",
+    "leaf": "#4CC38A",
+    "leafDeep": "#2E9E6A",
+    "sky": "#5BB8F5",
+    "skyDeep": "#3591D1",
+    "cloud": "#FFFFFF",
+    "cloudShade": "#D6E8FA",
+    "bark": "#8A5A3C"
+  }
+}
